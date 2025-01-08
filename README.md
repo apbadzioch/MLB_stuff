@@ -1,8 +1,1 @@
-This started as some practice for Data Science class with Python (NumPy, Pandas, Matplotlib, Seaborn) using MLB data. Now I am seeing if I can put together a pitch prediction app using scikit learn.
-
-- the data used first ws from retrosheet.org
-- importing standard libraries such as NumPy, Pandas, Matplotlib, and Seaborn
-- basic information gathering about the DataFrame
-    - attributes
-    - info
-    - describe
+This project came as I was using other datasets to practice what we were doing in my Python Data Science class at Houston Community College (Fall 2024). While thinking about what type of data I could use, I realized that baseball is built on data and statistics (and I was watching the playoffs), it was an easy descision.
