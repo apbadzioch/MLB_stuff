@@ -16,14 +16,14 @@ batter = pd.read_csv('batterStats.csv')
 def get_pitcher_data(pitcher):
     pitcher_data = pitch[pitch['last_name, first_name'] == pitcher]
     if pitcher_data.empty:
-        print("This pitcher is not in the dataset.");
+        print(f"This pitcher is not in the dataset {pitcher}.");
     else:                               
         return pitcher_data
 
 def get_batter_data(batterr):
     batter_data = batter[batter['last_name, first_name'] == batterr]
     if batter_data.empty:
-        print("This batter is not in the dataset.");
+        print(f"This batter is not in the dataset, {batterr}.");
     else:
         return batter_data
 
