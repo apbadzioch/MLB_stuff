@@ -9,8 +9,12 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Importing the datasets
-pitch = pd.read_csv('pitchStats.csv')
-batter = pd.read_csv('batterStats.csv')
+pitch_df = pd.read_csv('pitchStats.csv')
+batter_df = pd.read_csv('batterStats.csv')
+
+# Changing the name of the dataset
+pitch = pitch_df.copy()
+batter = batter_df.copy()
 
 # Filtering the data to only include the pitcher of interest
 def get_pitcher_data(pitcher):
