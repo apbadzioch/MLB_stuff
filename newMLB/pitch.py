@@ -31,10 +31,22 @@ def get_batter_data(batterr):
     else:
         return batter_data
 
+# plotting the data
+def plot_pitcher_data(pitcher):
+    pitcher_data = get_pitcher_data(pitcher)
+    if pitcher_data is not None:
+        plt.figure(figsize=(12, 6))
+        sns.countplot(data=pitcher_data)
+        plt.title(f'{pitcher} Pitch Type Count')
+        plt.show()
+    
 
+# Main function to run the program
 def main():
     pitcher = input("Enter the name of the pitcher you would like to analyze: ")    
     batter = input("Enter the name of the batter you would like to analyze: ")
+
+    plot_pitcher_data(pitcher)
 
     print(get_pitcher_data(pitcher))
     print(get_batter_data(batter))
