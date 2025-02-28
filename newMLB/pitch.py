@@ -16,6 +16,9 @@ batter_df = pd.read_csv('batterStats.csv')
 pitch = pitch_df.copy()
 batter = batter_df.copy()
 
+# renaming columns
+
+
 # Filtering the data to only include the pitcher of interest
 def get_pitcher_data(pitcher):
     pitcher_data = pitch[pitch['last_name, first_name'] == pitcher]
@@ -35,10 +38,12 @@ def get_batter_data(batterr):
 def plot_pitcher_data(pitcher):
     pitcher_data = get_pitcher_data(pitcher)
     if pitcher_data is not None:
-        plt.figure(figsize=(12, 6))
-        sns.countplot(data=pitcher_data)
-        plt.title(f'{pitcher} Pitch Type Count')
-        plt.show()
+        if 'pitch_type' in pitcher_data.columns:
+            pitch_type_counts = pitcher_data['pitch_type'].value_counts()
+            plt.figure(figsize=(12, 6))
+            sns.countplot(data=pitcher_data)
+            plt.title(f'{pitcher}: Pitch Type Count')
+            plt.show()
     
 
 # Main function to run the program
