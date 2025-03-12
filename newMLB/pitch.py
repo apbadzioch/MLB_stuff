@@ -23,14 +23,19 @@ batter = batter_df.copy()
 def get_pitcher_data(pitcher):
     pitcher_data = pitch[pitch['last_name, first_name'] == pitcher]
     if pitcher_data.empty:
-        print(f"This pitcher is not in the dataset {pitcher}.");
+        print(f"{pitcher} is not in the dataset.")
     else:                               
         return pitcher_data
 
-def get_batter_data(batterr):
-    batter_data = batter[batter['last_name, first_name'] == batterr]
+# Filtering data for historical pitch data
+def get_pitch_count_history(pitcher):
+    pitch_history = pitch[pitch["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
+
+# Filtering the data to only include the hitter of interest
+def get_batter_data(hitter):
+    batter_data = batter[batter['last_name, first_name'] == hitter]
     if batter_data.empty:
-        print(f"This batter is not in the dataset, {batterr}.");
+        print(f"{hitter} is not in the dataset.")
     else:
         return batter_data
 
@@ -48,16 +53,22 @@ def plot_pitcher_data(pitcher):
 
 # Main function to run the program
 def main():
-    pitcher = input("Enter the name of the pitcher you would like to analyze: ")    
-    batter = input("Enter the name of the batter you would like to analyze: ")
+    print()
+    print("Welcome to my MLB data analysis program.\n")
+    while True:      
+        choice = input("Would you  like to analyze a pitcher or hitter? (or type 'exit' to quit): ")   
+        if choice == 'pitcher':
+            pitcher = input("Enter the name of the pitcher: ")
+            print(get_pitcher_data(pitcher))
+        elif choice == 'hitter':
+            hitter = input("Enter the name of the hitter: ")
+            print(get_batter_data(hitter))
+        elif choice == 'exit':
+            print("Have a great day.")
+            return  
+        else:
+            print("Please enter either 'pitcher' or 'hitter'.")
 
-    plot_pitcher_data(pitcher)
-
-    print(get_pitcher_data(pitcher))
-    print(get_batter_data(batter))
-    
-    
-    
-    
+        
 if __name__ == "__main__":
     main()
