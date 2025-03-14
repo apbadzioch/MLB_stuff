@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from tkinter import *
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -27,9 +29,27 @@ def get_pitcher_data(pitcher):
     else:                               
         return pitcher_data
 
-# Filtering data for historical pitch data
-def get_pitch_count_history(pitcher):
-    pitch_history = pitch[pitch["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
+# Filtering data for plotting historical pitch data
+def plot_pitch_count_history(pitcher):
+    pitcher_data = get_pitcher_data(pitcher)
+    if pitcher_data is not None:
+        pitch_history = pitcher_data[["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
+        plt.figure(figsize=(12, 6))
+        sns.lineplot(data=pitch_history)
+        plt.show()
+
+# Putting the pitcher historical data into a GUI for easier reading
+def pitcher_data_GUI(pitcher):
+    pitcher_data = get_pitcher_data(pitcher)
+    if pitcher is not None:
+        pitch_history = pitcher_data[["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
+        window = tk()
+        window.title(f"{pitcher} Pitch History")
+        window.geometry()
+        label = Label(window, text=pitch_history)
+        label.pack()
+        window.mainloop()
+
 
 # Filtering the data to only include the hitter of interest
 def get_batter_data(hitter):
@@ -39,6 +59,7 @@ def get_batter_data(hitter):
     else:
         return batter_data
 
+'''
 # plotting the data
 def plot_pitcher_data(pitcher):
     pitcher_data = get_pitcher_data(pitcher)
@@ -48,7 +69,8 @@ def plot_pitcher_data(pitcher):
             plt.figure(figsize=(12, 6))
             sns.countplot(data=pitcher_data)
             plt.title(f'{pitcher}: Pitch Type Count')
-            plt.show()
+            plt.show()'
+'''
     
 
 # Main function to run the program
@@ -60,6 +82,8 @@ def main():
         if choice == 'pitcher':
             pitcher = input("Enter the name of the pitcher: ")
             print(get_pitcher_data(pitcher))
+            # plot_pitch_count_history(pitcher)
+            pitcher_data_GUI(pitcher)
         elif choice == 'hitter':
             hitter = input("Enter the name of the hitter: ")
             print(get_batter_data(hitter))
@@ -68,6 +92,8 @@ def main():
             return  
         else:
             print("Please enter either 'pitcher' or 'hitter'.")
+
+    
 
         
 if __name__ == "__main__":
