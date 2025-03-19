@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -33,21 +34,38 @@ def get_pitcher_data(pitcher):
 def plot_pitch_count_history(pitcher):
     pitcher_data = get_pitcher_data(pitcher)
     if pitcher_data is not None:
-        pitch_history = pitcher_data[["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
-        plt.figure(figsize=(12, 6))
-        sns.lineplot(data=pitch_history)
+        pitch_history = pitcher_data.groupby('year')[["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]].sum()
+        plt.figure(figsize=(15, 5))
+        sns.lineplot(data=pitch_history, x='year', y='pitch_count_offspeed', label='offspeed', marker='o', color='blue')
+        sns.lineplot(data=pitch_history, x='year', y='pitch_count_fastball', label='fastball', marker='o', color='red')
+        sns.lineplot(data=pitch_history, x='year', y='pitch_count_breaking', label='breaking', marker='o', color='green')
+        
+        plt.title(f"{pitcher} Pitch History")
+        plt.xlabel("year")
+        plt.ylabel("pitch count")
+        plt.legend()
+        plt.grid(True)
         plt.show()
+ 
 
 # Putting the pitcher historical data into a GUI for easier reading
 def pitcher_data_GUI(pitcher):
     pitcher_data = get_pitcher_data(pitcher)
-    if pitcher is not None:
-        pitch_history = pitcher_data[["pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
-        window = tk()
+    if pitcher_data is not None:
+        pitch_history = pitcher_data[["year", "pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
+        # Creating the GUI window
+        window = tk.Tk()
         window.title(f"{pitcher} Pitch History")
-        window.geometry()
-        label = Label(window, text=pitch_history)
-        label.pack()
+        window.geometry(600, 400)
+        # Creating the treeview table
+        tree = ttk.Treeview(window)
+        tree["columns"] = ('year', 'offspeed', 'fastball', 'breaking')
+        # Defining the columns
+        tree.column("#0", width=0, stretch=tk.NO)
+        tree.column('year', anchor=tk.CENTER, width=80)
+        tree.column('offspeed', anchor=tk.CENTER, width=120)
+        tree.column('fastball', anchor=tk.CENTER, width=120)
+        tree.column('breaking', anchor=tk.CENTER, width=120)
         window.mainloop()
 
 
@@ -59,19 +77,7 @@ def get_batter_data(hitter):
     else:
         return batter_data
 
-'''
-# plotting the data
-def plot_pitcher_data(pitcher):
-    pitcher_data = get_pitcher_data(pitcher)
-    if pitcher_data is not None:
-        if 'pitch_type' in pitcher_data.columns:
-            pitch_type_counts = pitcher_data['pitch_type'].value_counts()
-            plt.figure(figsize=(12, 6))
-            sns.countplot(data=pitcher_data)
-            plt.title(f'{pitcher}: Pitch Type Count')
-            plt.show()'
-'''
-    
+
 
 # Main function to run the program
 def main():
@@ -82,7 +88,7 @@ def main():
         if choice == 'pitcher':
             pitcher = input("Enter the name of the pitcher: ")
             print(get_pitcher_data(pitcher))
-            # plot_pitch_count_history(pitcher)
+            plot_pitch_count_history(pitcher)
             pitcher_data_GUI(pitcher)
         elif choice == 'hitter':
             hitter = input("Enter the name of the hitter: ")
