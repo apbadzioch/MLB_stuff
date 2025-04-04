@@ -29,6 +29,10 @@ def get_pitcher_data(pitcher):
         print(f"{pitcher} is not in the dataset.")
     else:                               
         return pitcher_data
+    
+# Determine the dominant pitch type for each pitcher
+#def dominant_pitch(pitcher):
+    
 
 # Filtering data for plotting historical pitch data
 def plot_pitch_count_history(pitcher):
