@@ -19,7 +19,7 @@ batter_df = pd.read_csv('batterStats.csv')
 pitch = pitch_df.copy()
 batter = batter_df.copy()
 
-# renaming columns
+# Renaming the columns for easier access
 
 
 # Filtering the data to only include the pitcher of interest
@@ -108,3 +108,4 @@ def main():
         
 if __name__ == "__main__":
     main()
+    
