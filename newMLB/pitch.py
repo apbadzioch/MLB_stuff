@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import tkinter as tk
-from tkinter import ttk
+#import tkinter as tk
+#from tkinter import ttk
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -51,7 +51,7 @@ def plot_pitch_count_history(pitcher):
         plt.grid(True)
         plt.show()
  
-
+'''
 # Putting the pitcher historical data into a GUI for easier reading
 def pitcher_data_GUI(pitcher):
     pitcher_data = get_pitcher_data(pitcher)
@@ -71,7 +71,7 @@ def pitcher_data_GUI(pitcher):
         tree.column('fastball', anchor=tk.CENTER, width=120)
         tree.column('breaking', anchor=tk.CENTER, width=120)
         window.mainloop()
-
+'''
 
 # Filtering the data to only include the hitter of interest
 def get_batter_data(hitter):
@@ -93,7 +93,7 @@ def main():
             pitcher = input("Enter the name of the pitcher: ")
             print(get_pitcher_data(pitcher))
             plot_pitch_count_history(pitcher)
-            pitcher_data_GUI(pitcher)
+            #pitcher_data_GUI(pitcher)
         elif choice == 'hitter':
             hitter = input("Enter the name of the hitter: ")
             print(get_batter_data(hitter))
