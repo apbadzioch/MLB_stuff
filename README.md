@@ -11,7 +11,7 @@ The goal: Predict the type of pitch a pitcher is most likely to throw, based on 
     - Random Forest
 - SMOTE for handling imbalanced data
 - Custom feature enginering: pitch ratios, variety, handedness
-**In-progress**
+### **In-progress**
 - Train and evaluate with <code>train_model()</code>
 - Predict new pitch types using <code>predict()</code>
 - Save and load trained models for reuse
