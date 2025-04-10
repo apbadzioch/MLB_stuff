@@ -9,7 +9,7 @@ The goal: Predict the type of pitch a pitcher is most likely to throw, based on 
 - Supervised learning models:
     - Logistic Regression
     - Random Forest
-- Optional SMOTE for handling imbalanced data
+- SMOTE for handling imbalanced data
 - Custom feature enginering: pitch ratios, variety, handedness
 **In-progress**
 - Train and evaluate with <code>train_model()</code>
