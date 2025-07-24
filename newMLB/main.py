@@ -5,11 +5,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-#import tkinter as tk
-#from tkinter import ttk
 
 import warnings
 warnings.filterwarnings('ignore')
+
 
 # Importing the datasets
 pitch_df = pd.read_csv('pitchStats.csv')
@@ -27,6 +26,9 @@ def reverse_name(name):
     else:
         return name
 
+
+#----------------------------------------------------------------------------------#
+
 # Filtering the data to only include the pitcher of interest
 def get_pitcher_data(pitcher):
     pitcher_data = pitch[pitch['last_name, first_name'] == pitcher]
@@ -34,6 +36,13 @@ def get_pitcher_data(pitcher):
         print(f"{reverse_name(pitcher)} is not in the dataset.")
     else:                               
         return pitcher_data
+    
+def get_pitch_year(year):
+    pitch_year = pitch[pitch["year"] == year]
+    if pitch_year.empty:
+        print(f"There is no pitch data for {year}")
+    else:
+        return pitch_year
     
 # Determine the dominant pitch type for each pitcher
 def dominant_pitch(pitcher):
@@ -68,9 +77,7 @@ def get_annual_data(pitcher):
         })
         annual_pitch = annual_data.idxmax()
         return annual_pitch
-
-            
-    
+   
 # Plotting the dominant pitch type for each pitcher
 # def plot_dominant_pitch(pitcher):
 
@@ -90,26 +97,11 @@ def plot_pitch_count_history(pitcher):
         plt.legend()
         plt.grid(True)
         plt.show()
- 
-# Putting the pitcher historical data into a GUI for easier reading
-def pitcher_data_GUI(pitcher):
-    pitcher_data = get_pitcher_data(pitcher)
-    if pitcher_data is not None:
-        pitch_history = pitcher_data[["year", "pitch_count_offspeed","pitch_count_fastball","pitch_count_breaking"]]
-        # Creating the GUI window
-        window = tk.Tk()
-        window.title(f"{reverse_name(pitcher)} Pitch History")
-        window.geometry(600, 400)
-        # Creating the treeview table
-        tree = ttk.Treeview(window)
-        tree["columns"] = ('year', 'offspeed', 'fastball', 'breaking')
-        # Defining the columns
-        tree.column("#0", width=0, stretch=tk.NO)
-        tree.column('year', anchor=tk.CENTER, width=80)
-        tree.column('offspeed', anchor=tk.CENTER, width=120)
-        tree.column('fastball', anchor=tk.CENTER, width=120)
-        tree.column('breaking', anchor=tk.CENTER, width=120)
-        window.mainloop()
+
+
+
+
+
 
 # Filtering the data to only include the hitter of interest
 def get_batter_data(hitter):
@@ -118,6 +110,8 @@ def get_batter_data(hitter):
         print(f"{reverse_name(hitter)} is not in the dataset.")
     else:
         return batter_data
+
+
 
 
 

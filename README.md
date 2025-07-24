@@ -21,8 +21,6 @@ The goal: Predict the type of pitch a pitcher is most likely to throw, based on 
 - Python
 - Pandas, NumPy
 - matplotlib
-- tkinter
 - Flask/Django
 - scikit-learn
-- joblib
 - Gym and stable-baselines3 for RL
